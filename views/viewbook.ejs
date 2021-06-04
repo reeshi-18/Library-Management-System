@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Books</title>
+    <link rel="stylesheet" type="text/css" href="/home.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <ul class="menu-items">
+            <li class="items"><a href='/user'>Home</a></li>
+            <li class="items"><a href='/viewuser'>View Users</a></li>
+            <li class="items"><a href='/addbook'>Add Book</a></li>
+            <li class="items"><a href='/viewbook'>View Books</a></li>
+            <li class="items"><a href='/userlog'>User Log</a></li>
+            <li class="items"><a href='/issue'>Issue Books</a></li>
+            <li class="items"><a href='/logout'>Logout</a></li>
+        </ul>
+    </div>
+    <div class="booklist">
+        <div>
+            <h2>Booklist</h2>
+            <br><br>
+            <div class="table-data">
+                <table border="1">
+                    <tr>
+                        <th>Sl no.</th>
+                        <th>Book name</th>
+                        <th>Author</th>
+                        <th>Genre</th>
+                        <th>ISBN</th>
+                        <th>Quantity</th>
+                    </tr>
+
+                    <% if(userData.length!=0){ var i=1; userData.forEach(function(data){ %>
+                        <tr>
+                            <td>
+                                <%=i; %>
+                            </td>
+                            <td>
+                                <%=data.name %>
+                            </td>
+                            <td>
+                                <%=data.author %>
+                            </td>
+                            <td>
+                                <%=data.genre %>
+                            </td>
+                            <td>
+                                <%=data.isbn %>
+                            </td>
+                            <td>
+                                <%=data.quantity %>
+                            </td>
+                        </tr>
+                        <% i++; }) %>
+                            <% } else{ %>
+                                <tr>
+                                    <td colspan="7">No Data Found</td>
+                                </tr>
+                                <% } %>
+                </table>
+            </div>
+        </div>
+        <div>
+            <form action='/viewbook' method="POST">
+                <input type="text" placeholder="Enter book name to search" name="search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>

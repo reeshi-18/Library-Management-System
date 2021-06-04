@@ -1,0 +1,16 @@
+.menu-items{
+    display: flex;
+}
+
+.items{
+    list-style-type: none;
+    padding: 15px;
+}
+
+.items a{
+    text-decoration: none;
+}
+
+.booklist{
+    display: flex;
+}

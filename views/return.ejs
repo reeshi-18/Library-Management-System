@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Books</title>
+    <link rel="stylesheet" type="text/css"   href="/home.css">
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <ul class="menu-items">
+            <li class="items"><a href='/user'>Home</a></li>
+            <li class="items"><a href='/booklist'>Booklist</a></li>
+            <li class="items"><a href='/history'>User History</a></li>
+            <li class="items"><a href='/return'>Return Books</a></li>
+            <li class="items"><a href='/logout'>Logout</a></li>
+        </ul>
+    </div>
+    <div>
+        <h2>Return Books</h2>
+        <br><br>
+        <div class="table-data">
+            <table border="1">
+                <tr>
+                    <th>Sl no.</th>
+                    <th>Book name</th>
+                    <th>ISBN</th>
+                    <th>Return</th>
+                </tr>
+
+                <% if(userData.length!=0){ var i=1; userData.forEach(function(data){ %>
+                    <tr>
+                        <td>
+                            <%=i; %>
+                        </td>
+                        <td>
+                            <%=data.name %>
+                        </td>
+                        <td>
+                            <%=data.isbn %>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="return" id="<%=data.isbn %>">
+                        </td>
+                    </tr>
+                    <% i++; }) %>
+                        <% } else{ %>
+                            <tr>
+                                <td colspan="4">No Books to return</td>
+                            </tr>
+                            <% } %>
+            </table>
+        </div>
+        <br>
+        <button onclick="checktags()">Return</button>
+    </div>
+
+    <script>
+        function checktags()
+        {
+            var books_checked = [];
+
+            var checkbox = document.querySelectorAll('input[type=checkbox]:checked');
+
+            for (var i = 0; i < checkbox.length; i++) {
+                books_checked.push(checkbox[i].id);
+            }
+            console.log(books_checked);
+
+            $.ajax({
+                type: "POST",
+                url: "/return",
+                data: { book: JSON.stringify(books_checked) },
+                success: function(msg){
+                
+                      
+                }
+                
+            });
+            location.reload(true);
+        }
+    </script>
+
+</body>
+</html>

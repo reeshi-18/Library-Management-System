@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css"   href="/home.css">
+
+</head>
+<body>
+
+    <div class="navbar">
+        <ul class="menu-items">
+            <li class="items"><a href='/'>Home</a></li>
+            <li class="items"><a href='/login_u'>Login as User</a></li>
+            <li class="items"><a href='/login_a'>Login as Admin</a></li>
+            <li class="items"><a href='/register'>Register</a></li>
+        </ul>
+    </div>
+    
+    <br>
+    <h2>Register</h2>
+    <br>
+
+    <div>
+        <form action="/register" method="POST">
+            <label> Select your role <br>
+                <input name="role" type="radio" value="admin" required> Admin <br>
+                <input name="role" type="radio" value="user" required> User
+            </label><br><br><br>
+
+            <label> Enter name <br>
+                <input name="name" type="text" placeholder="Enter name" required>
+            </label><br><br><br>
+
+            <label> Enter phone <br>
+                <input name="phone" type="text" placeholder="Enter phone number" required>
+            </label><br><br><br>
+
+            <label> Enter email <br>
+                <input name="email" type="text" placeholder="Enter email" required>
+            </label><br><br><br>
+
+            <label> Enter password <br>
+                <input name="pwd" type="password" placeholder="Enter password" required>
+            </label><br><br><br>
+
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+    
+</body>
+</html>

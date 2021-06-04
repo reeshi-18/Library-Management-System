@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue books</title>
+    <link rel="stylesheet" type="text/css" href="/home.css">
+    <script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <ul class="menu-items">
+            <li class="items"><a href='/user'>Home</a></li>
+            <li class="items"><a href='/viewuser'>View Users</a></li>
+            <li class="items"><a href='/addbook'>Add Book</a></li>
+            <li class="items"><a href='/viewbook'>View Books</a></li>
+            <li class="items"><a href='/userlog'>User Log</a></li>
+            <li class="items"><a href='/issue'>Issue Books</a></li>
+            <li class="items"><a href='/logout'>Logout</a></li>
+        </ul>
+    </div>
+    <div>
+        <h2>Pending requests</h2>
+        <br><br>
+        <div class="table-data">
+            <table border="1">
+                <tr>
+                    <th>Sl no.</th>
+                    <th>Book name</th>
+                    <th>ISBN</th>
+                    <th>User email</th>
+                    <th>Approval</th>
+                </tr>
+
+                <% if(statusData.length!=0){ var i=1; statusData.forEach(function(data){ %>
+                    <tr>
+                        <td>
+                            <%=i; %>
+                        </td>
+                        <td>
+                            <%=data.name %>
+                        </td>
+                        <td>
+                            <%=data.isbn %>
+                        </td>
+                        <td>
+                            <%=data.user %>
+                        </td>
+                        <td><input type="checkbox" name="approval" id="<%=data.isbn %>"></td>
+                    </tr>
+                    <% i++; }) %>
+                        <% } else{ %>
+                            <tr>
+                                <td colspan="5">No Data Found</td>
+                            </tr>
+                            <% } %>
+            </table>
+        </div>
+        <br>
+        <div>
+            <button onclick="checktags_approve()">Approve</button>
+            <button onclick="checktags_reject()">Reject</button>
+        </div>
+    </div>
+    <script>
+        function checktags_approve() {
+            var books_checked = [];
+
+            var checkbox = document.querySelectorAll('input[type=checkbox]:checked');
+
+            
+            for (var i = 0; i < checkbox.length; i++) {
+                books_checked.push(checkbox[i].id);
+            }
+            console.log(books_checked);
+
+            $.ajax({
+                type: "POST",
+                url: "/approve",
+                data: { book: JSON.stringify(books_checked) },
+                success: function(msg){
+                    console.log("data sent");
+                      
+                }
+            });
+            alert("Requests accepted");
+            location.reload(true);
+        }
+
+        function checktags_reject() {
+            var books_checked = [];
+
+            var checkbox = document.querySelectorAll('input[type=checkbox]:checked');
+
+            for (var i = 0; i < checkbox.length; i++) {
+                books_checked.push(checkbox[i].id);
+            }
+            console.log(books_checked);
+
+            $.ajax({
+                type: "POST",
+                url: "/reject",
+                data: { book: JSON.stringify(books_checked) },
+                success: function(msg){
+                    console.log("data sent");
+                      
+                }
+            });
+            location.reload(true);
+            alert("Requests rejected");
+        }
+
+
+    </script>
+</body>
+</html>

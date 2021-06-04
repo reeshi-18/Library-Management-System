@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Log</title>
+    <link rel="stylesheet" type="text/css"   href="/home.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <ul class="menu-items">
+            <li class="items"><a href='/user'>Home</a></li>
+            <li class="items"><a href='/viewuser'>View Users</a></li>
+            <li class="items"><a href='/addbook'>Add Book</a></li>
+            <li class="items"><a href='/viewbook'>View Books</a></li>
+            <li class="items"><a href='/userlog'>User Log</a></li>
+            <li class="items"><a href='/issue'>Issue Books</a></li>
+            <li class="items"><a href='/logout'>Logout</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Current Issued Books</h2>
+        <div class="table-data">
+            <table border="1">
+                <tr>
+                    <th>ID</th>
+                    <th>Name of user</th>
+                    <th>Email of user</th>
+                    <th>Name of book</th>
+                    <th>ISBN number</th>
+                </tr>
+
+                <% if(userData.length!=0){ var i=1; userData.forEach(function(data){ %>
+                    <tr>
+                        <td>
+                            <%=data.id %>
+                        </td>
+                        <td>
+                            <%=data.name %>
+                        </td>
+                        <td>
+                            <%=data.email %>
+                        </td>
+                        <td>
+                            <%=data.book %>
+                        </td>
+                        <td>
+                            <%=data.isbn %>
+                        </td>
+                    </tr>
+                    <% i++; }) %>
+                        <% } else{ %>
+                            <tr>
+                                <td colspan="5">No Data Found</td>
+                            </tr>
+                            <% } %>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
